@@ -649,7 +649,13 @@ class ChatGPTTelegramBot:
         """
         if update.edited_message or not update.message or update.message.via_bot:
             return
-
+        message = update.message
+        bot_username = context.bot.username
+        is_reply_to_bot = message.reply_to_message and message.reply_to_message.from_user.username == bot_username
+        is_mention = f"@{bot_username}" in message.text
+        if not (is_reply_to_bot or is_mention):
+        # If the message is neither a reply to the bot nor a mention, ignore it
+            return
         if not await self.check_allowed_and_within_budget(update, context):
             return
 
