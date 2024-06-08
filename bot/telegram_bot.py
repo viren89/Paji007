@@ -656,11 +656,16 @@ class ChatGPTTelegramBot:
         if not (is_reply_to_bot or is_mention):
         # If the message is neither a reply to the bot nor a mention, ignore it
             return
+<<<<<<< Updated upstream
+=======
+    
+>>>>>>> Stashed changes
         if not await self.check_allowed_and_within_budget(update, context):
             return
 
         logging.info(
             f'New message received from user {update.message.from_user.name} (id: {update.message.from_user.id})')
+        
         chat_id = update.effective_chat.id
         user_id = update.message.from_user.id
         prompt = message_text(update.message)
